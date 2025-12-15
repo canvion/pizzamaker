@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizza Maker</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+    <h1>Pizza Maker Interactiu</h1>
+
+    <form th:action="@{/create-pizza}" method="post">
+        <div class="section">
+            <h2>Selecciona la mida:</h2>
+            <label><input type="radio" name="size" value="Petita" required> Petita (20cm)</label>
+            <label><input type="radio" name="size" value="Mitjana"> Mitjana (30cm)</label>
+            <label><input type="radio" name="size" value="Gran"> Gran (40cm)</label>
+        </div>
+
+        <div class="section">
+            <h2>Tipus de massa:</h2>
+            <label><input type="radio" name="dough" value="Fina" required> Fina</label>
+            <label><input type="radio" name="dough" value="Gruixuda"> Gruixuda</label>
+            <label><input type="radio" name="dough" value="Integral"> Integral</label>
+        </div>
+
+        <div class="section">
+            <h2>Tria els ingredients:</h2>
+            <label><input type="checkbox" name="ingredients" value="Formatge"> Formatge</label>
+            <label><input type="checkbox" name="ingredients" value="Tomàquet"> Tomàquet</label>
+            <label><input type="checkbox" name="ingredients" value="Pernil"> Pernil</label>
+            <label><input type="checkbox" name="ingredients" value="Xampinyons"> Xampinyons</label>
+            <label><input type="checkbox" name="ingredients" value="Olives"> Olives</label>
+            <label><input type="checkbox" name="ingredients" value="Pinya"> Pinya</label>
+        </div>
+
+        <button type="submit">Crear la meva pizza!</button>
+    </form>
+
+    <div th:if="${pizzaCreated}" class="result">
+        <h2>La teva pizza està llesta!</h2>
+        <p><strong>Mida:</strong> <span th:text="${size}"></span></p>
+        <p><strong>Massa:</strong> <span th:text="${dough}"></span></p>
+        <p><strong>Ingredients:</strong> <span th:text="${ingredientsList}"></span></p>
+    </div>
+</div>
+</body>
+</html>
