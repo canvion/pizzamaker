@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizza Maker - Crea la teva pizza</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+    <h1>Pizza Maker Interactiu</h1>
+    <p class="subtitle">Personalitza la teva pizza perfecta</p>
+
+    <form th:action="@{/create}" method="post">
+
+         Recorrer cada categoría de ingredientes
+        <div th:each="categoria : ${ingredientsPorCategoria}" class="section">
+            <h2 th:text="${categoria.key}"></h2>
+
+             Mostrar ingredientes de la categoría z
+            <div th:each="ingredient : ${categoria.value}">
+                <label>
+                    <input type="checkbox"
+                           name="ingredients"
+                           th:value="${ingredient.nom}">
+                    <span th:text="${ingredient.nom}"></span>
+                    <span class="price" th:text="${ingredient.preu + '€'}"></span>
+                </label>
+            </div>
+        </div>
+
+        <button type="submit">🍕 Cuinar la meva pizza!</button>
+    </form>
+
+    <div class="actions">
+        <a th:href="@{/history}" class="link-button">📋 Veure historial de pizzes</a>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rebut - Pizza Maker</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+    <div class="receipt">
+        <h1>🍕 Rebut de la teva pizza</h1>
+
+        <div class="receipt-section">
+            <h3>📝 ID de Comanda</h3>
+            <p class="order-id" th:text="${pizza.id}"></p>
+        </div>
+
+        <div class="receipt-section">
+            <h3>🥘 Ingredients seleccionats</h3>
+            <ul class="ingredients-list">
+                <li th:each="ingredient : ${pizza.ingredients}">
+                    <span th:text="${ingredient.nom}"></span>
+                    <span class="ingredient-price" th:text="${ingredient.preu + '€'}"></span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="receipt-section">
+            <h3>💰 Preu Total</h3>
+            <p class="total-price">
+                <span th:text="${#numbers.formatDecimal(pizza.preuTotal, 1, 2) + '€'}"></span>
+            </p>
+            <p class="discount-info" th:if="${pizza.preuTotal < pizza.ingredients.stream().mapToDouble(i -> i.preu).sum()}">
+                ✨ S'ha aplicat un 10% de descompte!
+            </p>
+        </div>
+
+        <div class="receipt-section">
+            <h3>⏱️ Temps de Preparació</h3>
+            <p class="prep-time" th:text="${pizza.tempsPrep + ' minuts'}"></p>
+        </div>
+
+        <div class="receipt-footer">
+            <p>Gràcies per la teva comanda! 🎉</p>
+        </div>
+
+        <div class="actions">
+            <a th:href="@{/}" class="button-link">🍕 Crear altra pizza</a>
+            <a th:href="@{/history}" class="button-link secondary">📋 Veure historial</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

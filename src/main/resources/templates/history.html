@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial - Pizza Maker</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+    <h1>📋 Historial de Pizzes</h1>
+    <p class="subtitle">Últimes 5 pizzes creades</p>
+
+    <!-- Si hay pizzas en el historial -->
+    <div th:if="${!historial.isEmpty()}">
+        <div th:each="pizza, iterStat : ${historial}" class="history-item">
+            <div class="history-header">
+                <h3>Pizza #<span th:text="${iterStat.index + 1}"></span></h3>
+                <span class="order-id-small" th:text="${pizza.id}"></span>
+            </div>
+
+            <div class="history-content">
+                <p><strong>Ingredients:</strong> <span th:text="${pizza.ingredientsNoms}"></span></p>
+                <p><strong>Preu:</strong> <span th:text="${#numbers.formatDecimal(pizza.preuTotal, 1, 2) + '€'}"></span></p>
+                <p><strong>Temps prep:</strong> <span th:text="${pizza.tempsPrep + ' min'}"></span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Si no hay pizzas -->
+    <div th:if="${historial.isEmpty()}" class="empty-state">
+        <p>🍕 Encara no has creat cap pizza!</p>
+    </div>
+
+    <div class="actions">
+        <a th:href="@{/}" class="button-link">🍕 Crear nova pizza</a>
+    </div>
+</div>
+</body>
+</html>
