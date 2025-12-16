@@ -31,8 +31,9 @@
             <p class="total-price">
                 <span th:text="${#numbers.formatDecimal(pizza.preuTotal, 1, 2) + '€'}"></span>
             </p>
-            <p class="discount-info" th:if="${pizza.preuTotal < pizza.ingredients.stream().mapToDouble(i -> i.preu).sum()}">
-                ✨ S'ha aplicat un 10% de descompte!
+            <p class="discount-info" th:if="${pizza.preuTotal != null}">
+                <span th:if="${pizza.preuTotal < 12.0}"></span>
+                <span th:unless="${pizza.preuTotal < 12.0}">✨ S'ha aplicat un 10% de descompte!</span>
             </p>
         </div>
 

@@ -11,6 +11,7 @@ public class Pizza {
     private double preuTotal;
     private int tempsPrep;
     private LocalDateTime dataCreacio;
+    private boolean teDescompte;
 
     // Constructor
     public Pizza() {
@@ -30,9 +31,12 @@ public class Pizza {
                 .mapToDouble(Ingredient::getPreu)
                 .sum();
 
-        // descuento si > 12€
+        // Aplicar descuento si > 12€
         if (this.preuTotal > 12) {
+            this.teDescompte = true;
             this.preuTotal = this.preuTotal * 0.9; // 10% descuento
+        } else {
+            this.teDescompte = false;
         }
     }
 
@@ -77,5 +81,13 @@ public class Pizza {
                 .map(Ingredient::getNom)
                 .reduce((a, b) -> a + ", " + b)
                 .orElse("Sense ingredients");
+    }
+
+    public boolean isTeDescompte() {
+        return teDescompte;
+    }
+
+    public void setTeDescompte(boolean teDescompte) {
+        this.teDescompte = teDescompte;
     }
 }
