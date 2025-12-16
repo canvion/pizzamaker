@@ -19,7 +19,6 @@ public class Pizza {
         this.id = generateId();
     }
 
-    // Generar ID único formato "PIZZA-YYYYMMDD-HHMMSS"
     private String generateId() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss");
         return "PIZZA-" + dataCreacio.format(formatter);
@@ -31,7 +30,7 @@ public class Pizza {
                 .mapToDouble(Ingredient::getPreu)
                 .sum();
 
-        // Aplicar descuento si > 12€
+        // descuento si > 12€
         if (this.preuTotal > 12) {
             this.preuTotal = this.preuTotal * 0.9; // 10% descuento
         }
